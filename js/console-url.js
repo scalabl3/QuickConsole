@@ -24,6 +24,7 @@ function decrypt_settings(passphrase) {
         dec = JSON.parse(dec.toString(CryptoJS.enc.Utf8));
         if (dec.qc_cipher === passphrase) {
             qc.settings = _.defaultsDeep(dec, qc.settings);
+            qc.settings.uuid = "quick-console-" + (1000000 + Math.floor(Math.random() * 1000000));
             return true;
         }
 
