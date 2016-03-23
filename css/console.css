@@ -52,6 +52,9 @@ button i.white {
 button.btn-on {
   background: green !important; }
 
+button:focus {
+  border: none !important; }
+
 .fa-rotate-45 {
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
