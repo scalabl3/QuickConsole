@@ -49,6 +49,9 @@ button strong.white {
 button i.white {
   color: white; }
 
+button.btn-on {
+  background: green !important; }
+
 .fa-rotate-45 {
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);

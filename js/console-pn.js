@@ -97,14 +97,14 @@ function do_publish_auto() {
         save_to_querystring();
 
         console.log("auto-publish started", "[ every " + _.truncate(qc.settings.auto_publish_interval / 1000) + " seconds]");
-        $("#btn-publish-auto").toggleClass("btn-default btn-success");
+        $("#btn-publish-auto").toggleClass("btn-default btn-success btn-on");
     }
     else {
         clearInterval(auto_pub);
         auto_pub = null;
         qc.settings.auto_publish = false;
         console.log("auto-publish ended");
-        $("#btn-publish-auto").toggleClass("btn-default btn-success");
+        $("#btn-publish-auto").toggleClass("btn-default btn-success btn-on");
     }
 }
 
