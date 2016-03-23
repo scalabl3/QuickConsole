@@ -1,0 +1,216 @@
+$message-base-font-size: 10px
+$message-column-width: 300px
+$message-column-border-color: #444
+
+
+#jsoneditor
+  height: 400px
+
+div.jsoneditor-menu a.jsoneditor-poweredBy
+  display: none
+
+div.jsoneditor-field, div.jsoneditor-value, div.jsoneditor td, div.jsoneditor th, div.jsoneditor textarea, .jsoneditor-schema-error
+  font-family: droid sans mono, menlo, consolas, monospace, courier new, courier, sans-serif
+  font-size: $message-base-font-size
+  color: #1A1A1A
+
+.ace_editor, .ace-jsoneditor
+  font-family: droid sans mono, menlo, consolas, monospace, courier new, courier, sans-serif
+  font-size: $message-base-font-size
+  //font-family: 'Open Sans', sans-serif
+  //font-family: 'Roboto Condensed', sans-serif
+  //
+  //font-family: 'Palanquin', sans-serif
+
+.console-name
+  font-family: 'Source Sans Pro', sans-serif
+  margin-right: 30px !important
+  font-size: 18px
+  color: #ddd
+  padding: 1px
+
+.ace_scrollbar
+  //display: none
+  -webkit-transition: opacity .3s ease-in-out
+  -moz-transition: opacity .3s ease-in-out
+  -ms-transition: opacity .3s ease-in-out
+  -o-transition: opacity .3s ease-in-out
+  transition: opacity .3s ease-in-out
+  opacity: 0
+
+.ace_editor:hover .ace_scrollbar
+  opacity: 0.75
+
+div.editor
+  position: relative
+  overflow: hidden
+
+
+#message-columns
+  border-collapse: collapse
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+
+  div.channel-container
+    height: 100%
+    float: left
+    width: $message-column-width
+    min-width: $message-column-width
+    position: absolute
+    background: #000
+    overflow: hidden
+
+    div.channel-header
+      font-family:  Roboto, "Helvetica Neue", Monaco, Consolas, sans-serif
+      position: static
+      background: darken(#ED0D07, 20%)
+      padding: 4px
+      padding-left: 8px
+      color: #eee
+      border-right: 1px solid lighten($message-column-border-color, 30%)
+
+      .toggler
+        position: absolute
+        right: 5px
+        top: 4px
+        color: #c0c0c0
+
+      .on
+        color: #eee
+        font-size: $message-base-font-size + 6
+        top: 5px
+
+    div.messages-outer
+      position: absolute
+      top: 26px
+      bottom: 0px
+      width: $message-column-width
+      min-width: $message-column-width
+      overflow: hidden
+      background: #000
+      //border: 1px solid white
+      border-right: 1px solid lighten($message-column-border-color, 30%)
+    //margin-bottom: 15px
+
+
+    div.messages
+      position: relative
+      overflow: hidden
+      margin-right: 14px
+
+    div.message-content
+      border-bottom: 1px solid $message-column-border-color
+      background: #222
+
+      pre, code
+        border: none
+        border-radius: 0
+        background: transparent !important
+        margin: 0
+
+      pre
+        padding: 5px
+
+    div.message-content:last-child
+      background: #444
+
+      div.message-header
+        background: #333
+
+      div.message-footer
+        background: #333
+
+    div.message-header
+      font-size: 11px
+      font-family: sans-serif, SansSerif
+      background: #111
+      padding: 5px 10px
+
+      .published
+        text-align: left
+
+    div.message-footer
+      font-size: 11px
+      font-family: sans-serif, SansSerif
+      background: #111
+      padding: 5px 5px
+
+      .publisher
+        text-align: right
+
+  div.publish
+    background: #003
+
+    .section-header
+      padding: 3px
+
+    .pub-button
+      margin-top: 10px
+      text-align: center
+
+    div.messages-outer
+      background: #003
+
+    div.channel-header
+      background: darken(#070DED, 20%)
+
+
+.message-header-font-tuner
+  font-size: $message-base-font-size + 3
+
+.message-header-font-tuner-toggle
+  font-size: $message-base-font-size + 8
+
+.message-font-tuner
+  font-size: $message-base-font-size
+  pre
+    font-size: inherit !important
+    code
+      font-size: inherit !important
+
+#message-columns
+  div.channel-container:nth-of-type(1)
+    left: 0px
+  div.channel-container:nth-of-type(2)
+    left: $message-column-width * 1
+  div.channel-container:nth-of-type(3)
+    left: $message-column-width * 2
+  div.channel-container:nth-of-type(4)
+    left: $message-column-width * 3
+  div.channel-container:nth-of-type(5)
+    left: $message-column-width * 4
+  div.channel-container:nth-of-type(6)
+    left: $message-column-width * 5
+  div.channel-container:nth-of-type(7)
+    left: $message-column-width * 6
+  div.channel-container:nth-of-type(8)
+    left: $message-column-width * 7
+  div.channel-container:nth-of-type(9)
+    left: $message-column-width * 8
+  div.channel-container:nth-of-type(10)
+    left: $message-column-width * 9
+  div.channel-container:nth-of-type(11)
+    left: $message-column-width * 10
+  div.channel-container:nth-of-type(12)
+    left: $message-column-width * 11
+  div.channel-container:nth-of-type(13)
+    left: $message-column-width * 12
+  div.channel-container:nth-of-type(14)
+    left: $message-column-width * 13
+  div.channel-container:nth-of-type(15)
+    left: $message-column-width * 14
+  div.channel-container:nth-of-type(16)
+    left: $message-column-width * 15
+  div.channel-container:nth-of-type(17)
+    left: $message-column-width * 16
+  div.channel-container:nth-of-type(18)
+    left: $message-column-width * 17
+  div.channel-container:nth-of-type(19)
+    left: $message-column-width * 18
+  div.channel-container:nth-of-type(20)
+    left: $message-column-width * 19
+  div.channel-container:nth-of-type(21)
+    left: $message-column-width * 20
+

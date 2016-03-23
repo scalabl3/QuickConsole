@@ -1,0 +1,8 @@
+* Add Channel Button
+* Encrypt Settings
+* Publish To Button
+* Column Move (L/R), Remove
+* Pause/Resume Subscribe 
+* Blocks Mode Icon
+* Activity Log Pane
+* XHR Implementation

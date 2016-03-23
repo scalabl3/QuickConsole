@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.3.0/bignumber.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/perfect-scrollbar.jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/js/jquery.tooltipster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/theme-twilight.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-json.js"></script>
+
+    <script src="https://cdn.pubnub.com/pubnub-3.14.4.min.js"></script>
+    <script src="https://cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+    <script src="js/subv2_old.js"></script>
+
+    <script src="js/console.js"></script>
+    <script src="js/console-columns.js"></script>
+    <script src="js/console-bindings.js"></script>
+    <script src="js/console-url.js"></script>
+    <script src="js/console-pn.js"></script>
+    <script src="js/console-util.js"></script>
+    <script src="js/geo-data.js"></script>
+
+    <link rel="icon" href="./images/favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed|Source+Sans+Pro|Palanquin' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-uSbimwRPo7PKyTL6azsx1CcBce/X9Qg+wX1MAjNV1gAkSXYveZbZeMMyJghdsSol" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/darkula.min.css"rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/css/tooltipster.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css" rel="stylesheet">
+
+    <link href="css/editor-dark.css" rel="stylesheet" >
+    <link href="css/console.css" rel="stylesheet" >
+    <link href="css/console-modals.css" rel="stylesheet" >
+    <link href="css/console-columns.css" rel="stylesheet" >
+
+</head>
+<body>
+<div id="wrapper"><div id="wrapper-scroll">
+    <div class="dttable">
+        <div id="message-columns" class="middle dtrow">
+            <div class="channel-container dtcell publish" data-channel="publish">
+                <div class="channel-header message-header-font-tuner">
+                    Publish
+                </div>
+                <div class="messages-outer">
+                    <div class="section-header">
+                        Message
+                    </div>
+                    <div id="jsoneditor" class="editor message-font-tuner"></div>
+                    <div class="section-header">
+                        Channel
+                    </div>
+                    <div>
+                        <input class="form-control" id="txt-pubchannels2" type="text" />
+                    </div>
+                    <div class="pub-button">
+                        <button id="btn-publish" class="btn btn-default btn-sm">publish</button>&nbsp;<button id="btn-publish-auto" class="btn btn-default btn-sm">auto-publish</button>
+                    </div>
+                    <div class="section-header">
+                        JSON Samples
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn-sm" onclick="update_sample_json('empty');">empty</button>
+                        <button class="btn btn-default btn-sm" onclick="update_sample_json('timestamp');">timestamp</button>
+                        <button class="btn btn-default btn-sm" onclick="update_sample_json('sequence');">sequence</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <p class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img id="console-brand" alt="Brand" src="images/pubnub-icon-600x600.png">
+            </a>
+        </div>
+        <ul id="quick-nav-buttons" class="nav navbar-nav navbar-left scroll-buttons">
+            <li id="quick-nav-publish">
+                <button href="/" onclick="scrollX(0)" class="tooltipper" title="Publish Message [CTRL-1]">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <strong class="fa-stack-1x white">P</strong>
+                    </span>
+                </button>
+            </li>
+            <li id="quick-nav-add-channel">
+                <button class="tooltipper" title="Add Channel Subscription" data-toggle="modal" data-target="#modal-add-channel">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <strong class="fa-stack-1x white">+</strong>
+                    </span>
+                </button>
+            </li>
+        </ul>
+        <ul id="other-nav-buttons" class="nav navbar-nav navbar-right">
+            <li style="margin-right: 10px;">
+                <button class="tooltipper" style="font-size: 110%;" title="Activity Log" data-toggle="modal" data-target="#modal-encrypt-passphrase">
+                    <i class="fa fa-list fa-2x"></i>
+                </button>
+            </li>
+            <li>
+                <button class="tooltipper" style="font-size: 110%" title="Add Password" data-toggle="modal" data-target="#modal-encrypt-passphrase">
+                    <i class="fa fa-unlock fa-2x"></i>
+                </button>
+            </li>
+            <li>
+                <button id="button-editor-formatting" class="tooltipper" title="Editor Formatting">
+                    <i class="fa fa-font fa-2x"></i>
+                </button>&nbsp;&nbsp;
+            </li>
+            <li>
+                <button class="tooltipper" title="Settings" data-toggle="modal" data-target="#modal-set-pubsub">
+                    <i class="fa fa-gear fa-2x"></i>
+                </button>
+            </li>
+        </ul>
+        <div id="console-name" class="navbar-right console-name">My Console</div>
+    </div>
+</nav>
+
+<div id="modal-add-channel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-channel-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Add Channel Subscription</h6>
+            </div>
+            <div class="modal-body">
+                &nbsp;&nbsp;<small>multiple channels should be comma separated</small><br />
+                <input id="txt-add-channel" class="form-control" type="text" placeholder="channel(s)" /><br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-error" data-dismiss="modal">Cancel</button>
+                <button id="btn-add-channel" type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-decrypt-passphrase" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="decrypt-password-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title"><i class="fa fa-1x fa-unlock"></i>&nbsp;&nbsp;Enter Passphrase to Decrypt Settings</h6>
+            </div>
+            <div class="modal-body">
+                <div id="form-decrypt-passphrase" class="form-group">
+                    <label class="control-label" for="decrypt-passphrase">Passphrase</label>
+                    <input id="decrypt-passphrase" class="form-control" type="password" />
+                    <span class="glyphicon glyphicon-remove form-control-feedback sr-only" aria-hidden="true"></span>
+                    <span class="help-block sr-only">that passphrase was incorrect</span>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-error" data-dismiss="modal">Reset Console</button>
+                <button id="btn-decrypt" type="button" class="btn btn-primary">Unlock&nbsp;&nbsp;<i class="fa fa-lock"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-encrypt-passphrase" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="decrypt-password-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title"><i class="fa fa-1x fa-lock"></i>&nbsp;&nbsp;Enter Passphrase to Encrypt Settings</h6>
+            </div>
+            <div class="modal-body">
+                <div id="form-encrypt-passphrase" class="form-group">
+                    <label class="control-label" for="encrypt-passphrase">Passphrase</label>
+                    <input id="encrypt-passphrase" class="form-control" type="password" />
+                    <span class="glyphicon glyphicon-remove form-control-feedback sr-only" aria-hidden="true"></span>
+                    <span class="help-block sr-only">that passphrase was incorrect</span>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-error" data-dismiss="modal">Remove Encryption</button>
+                <button id="btn-encrypt" type="button" class="btn btn-primary">Lock&nbsp;&nbsp;<i class="fa fa-lock"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-set-pubsub" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="set-pubsub-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Console Settings</h6>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txt-pn-origin" class="control-label">Mode</label><br />
+                    <label class="radio-inline">
+                        <input type="radio" name="rad-pn-origin" id="rad-pn-origin-1" value="pubsub.pubnub.com" checked="checked"> PUBNUB
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rad-pn-origin" id="rad-pn-origin-2" value="blocks.pubnub.com"> BLOCKS
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="txt-pn-origin" class="control-label">Origin</label>
+                    <input type="text" id="txt-pn-origin" class="form-control" value="pubsub.pubnub.com" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="txt-console-name" class="control-label">Console Name</label>
+                    <input type="text" id="txt-console-name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txt-pubkey" class="control-label">Publish Key</label>
+                    <input type="text" id="txt-pubkey" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txt-subkey" class="control-label">Subscribe Key</label>
+                    <input type="text" id="txt-subkey" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="txt-subchannels" class="control-label">Subscribed Channels</label>
+                    <input type="text" id="txt-subchannels" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txt-authkey" class="control-label">Auth Key</label>
+                    <input type="text" id="txt-authkey" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txt-pubchannels" class="control-label">Publish Channels</label>
+                    <input type="text" id="txt-pubchannels" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txt-shareurl" class="control-label">Share Link <small><a id="shareurl-a">console</a></small></label>
+                    <input type="text" id="txt-shareurl" class="form-control" readonly/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="editor-mod-pane">
+    <div id="mod-container">
+        <p>
+            <strong>Font Size</strong><br />
+            <button class="tooltipper" title="Decrease Font Size" onclick="decrease_font_size()">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-arrow-down fa-stack-1x white"></i>
+                    </span>
+            </button>
+
+            <button class="tooltipper" title="Increase Font Size" onclick="increase_font_size()">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-arrow-up fa-stack-1x white"></i>
+                    </span>
+            </button>
+        </p>
+        <p>
+            <strong>Columns</strong><br />
+            <button class="tooltipper" title="Decrease Width" onclick="decrease_column_size()">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-compress fa-stack-1x fa-rotate-45 white"></i>
+                    </span>
+            </button>
+
+            <button class="tooltipper" title="Decrease Width" onclick="increase_column_size()">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-expand fa-stack-1x fa-rotate-45 white"></i>
+                    </span>
+            </button>
+        </p>
+        <p>
+            <strong>Presets</strong><br />
+            <button class="tooltipper" title="Default" onclick="set_preset(1)">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-desktop fa-stack-1x white" style="font-size: 60%"></i>
+                    </span>
+            </button>
+            <button class="tooltipper" title="Large" onclick="set_preset(2)">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-desktop fa-stack-1x white" style="font-size: 80%"></i>
+                    </span>
+            </button>
+            <button class="tooltipper" title="Larger" onclick="set_preset(3)">
+                    <span class="fa-stack fa-1x">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-desktop fa-stack-1x white" style="font-size: 100%"></i>
+                    </span>
+            </button>
+        </p>
+
+    </div>
+</div>
+</body>
+</html>

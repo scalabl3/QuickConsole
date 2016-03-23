@@ -1,0 +1,117 @@
+body, html {
+  min-height: 100%;
+  padding: 0;
+  margin: 0; }
+
+html {
+  border-bottom: 10px solid #aaa !important; }
+
+body {
+  padding-bottom: 46px;
+  background: #222 url("../images/carbon.png") repeat; }
+
+#wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 51px;
+  left: 0;
+  right: 0; }
+
+#wrapper-scroll {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+div.dttable {
+  display: table;
+  height: 100%;
+  width: 100%; }
+
+div.dtrow {
+  display: table-row; }
+
+div.dtcell {
+  display: table-cell; }
+
+div.middle {
+  position: absolute;
+  top: 0; }
+
+button {
+  background: none !important;
+  border: none;
+  padding: 0; }
+
+button strong.white {
+  color: white; }
+button i.white {
+  color: white; }
+
+.fa-rotate-45 {
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+nav.navbar {
+  min-height: 46px;
+  padding: 5px; }
+  nav.navbar .channel-button {
+    color: white; }
+
+nav.navbar, nav.navbar-default {
+  border-top-color: #555;
+  border-bottom: 5px solid #333 !important;
+  text-emphasis: dot; }
+
+nav li a {
+  padding: 2px 10px !important; }
+nav ul#quick-nav-buttons li button, nav ul#other-nav-buttons li button, nav ul#mod-buttons li button {
+  background: none;
+  border: none;
+  padding: 2px 2px !important; }
+nav ul#quick-nav-buttons li button:hover, nav ul#quick-nav-buttons li button:focus, nav ul#quick-nav-buttons li button:active, nav ul#quick-nav-buttons li button:visited, nav ul#other-nav-buttons li button:hover, nav ul#other-nav-buttons li button:focus, nav ul#other-nav-buttons li button:active, nav ul#other-nav-buttons li button:visited, nav ul#mod-buttons li button:hover, nav ul#mod-buttons li button:focus, nav ul#mod-buttons li button:active, nav ul#mod-buttons li button:visited {
+  color: #888888 !important;
+  border: none;
+  outline: none; }
+nav ul#quick-nav-buttons li button:focus i, nav ul#quick-nav-buttons li button:active i, nav ul#other-nav-buttons li button:focus i, nav ul#other-nav-buttons li button:active i, nav ul#mod-buttons li button:focus i, nav ul#mod-buttons li button:active i {
+  color: #555; }
+nav ul#quick-nav-buttons li:first-of-type button {
+  margin-right: 10px; }
+nav ul#quick-nav-buttons li:last-of-type button {
+  margin-left: 10px; }
+nav ul#other-nav-buttons li {
+  width: 42px; }
+nav .navbar-brand {
+  height: 30px;
+  padding: 0;
+  color: #eac;
+  margin-right: 30px; }
+  nav .navbar-brand img {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px; }
+nav .form-control {
+  padding: 4px 20px;
+  height: 28px;
+  font-size: 12px;
+  line-height: 1.1; }
+nav .pubsub {
+  background: #eeeecc;
+  width: 270px !important;
+  padding: 4px 10px !important;
+  font-size: 11px !important;
+  text-align: center; }
+nav .pubsub-entered {
+  background: #eeeeee; }
+nav .channel {
+  background: #cceecc;
+  width: 220px !important;
+  color: black !important; }
+
+.navbar-console {
+  background: #661111;
+  min-height: 30px; }
+
+/*# sourceMappingURL=console.css.map */

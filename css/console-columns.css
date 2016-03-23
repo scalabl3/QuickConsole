@@ -1,0 +1,180 @@
+#jsoneditor {
+  height: 400px; }
+
+div.jsoneditor-menu a.jsoneditor-poweredBy {
+  display: none; }
+
+div.jsoneditor-field, div.jsoneditor-value, div.jsoneditor td, div.jsoneditor th, div.jsoneditor textarea, .jsoneditor-schema-error {
+  font-family: droid sans mono, menlo, consolas, monospace, courier new, courier, sans-serif;
+  font-size: 10px;
+  color: #1A1A1A; }
+
+.ace_editor, .ace-jsoneditor {
+  font-family: droid sans mono, menlo, consolas, monospace, courier new, courier, sans-serif;
+  font-size: 10px; }
+
+.console-name {
+  font-family: "Source Sans Pro", sans-serif;
+  margin-right: 30px !important;
+  font-size: 18px;
+  color: #ddd;
+  padding: 1px; }
+
+.ace_scrollbar {
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0; }
+
+.ace_editor:hover .ace_scrollbar {
+  opacity: 0.75; }
+
+div.editor {
+  position: relative;
+  overflow: hidden; }
+
+#message-columns {
+  border-collapse: collapse;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0; }
+  #message-columns div.channel-container {
+    height: 100%;
+    float: left;
+    width: 300px;
+    min-width: 300px;
+    position: absolute;
+    background: #000;
+    overflow: hidden; }
+    #message-columns div.channel-container div.channel-header {
+      font-family: Roboto, "Helvetica Neue", Monaco, Consolas, sans-serif;
+      position: static;
+      background: #8a0804;
+      padding: 4px;
+      padding-left: 8px;
+      color: #eee;
+      border-right: 1px solid #919191; }
+      #message-columns div.channel-container div.channel-header .toggler {
+        position: absolute;
+        right: 5px;
+        top: 4px;
+        color: #c0c0c0; }
+      #message-columns div.channel-container div.channel-header .on {
+        color: #eee;
+        font-size: 16px;
+        top: 5px; }
+    #message-columns div.channel-container div.messages-outer {
+      position: absolute;
+      top: 26px;
+      bottom: 0px;
+      width: 300px;
+      min-width: 300px;
+      overflow: hidden;
+      background: #000;
+      border-right: 1px solid #919191; }
+    #message-columns div.channel-container div.messages {
+      position: relative;
+      overflow: hidden;
+      margin-right: 14px; }
+    #message-columns div.channel-container div.message-content {
+      border-bottom: 1px solid #444;
+      background: #222; }
+      #message-columns div.channel-container div.message-content pre, #message-columns div.channel-container div.message-content code {
+        border: none;
+        border-radius: 0;
+        background: transparent !important;
+        margin: 0; }
+      #message-columns div.channel-container div.message-content pre {
+        padding: 5px; }
+    #message-columns div.channel-container div.message-content:last-child {
+      background: #444; }
+      #message-columns div.channel-container div.message-content:last-child div.message-header {
+        background: #333; }
+      #message-columns div.channel-container div.message-content:last-child div.message-footer {
+        background: #333; }
+    #message-columns div.channel-container div.message-header {
+      font-size: 11px;
+      font-family: sans-serif, SansSerif;
+      background: #111;
+      padding: 5px 10px; }
+      #message-columns div.channel-container div.message-header .published {
+        text-align: left; }
+    #message-columns div.channel-container div.message-footer {
+      font-size: 11px;
+      font-family: sans-serif, SansSerif;
+      background: #111;
+      padding: 5px 5px; }
+      #message-columns div.channel-container div.message-footer .publisher {
+        text-align: right; }
+  #message-columns div.publish {
+    background: #003; }
+    #message-columns div.publish .section-header {
+      padding: 3px; }
+    #message-columns div.publish .pub-button {
+      margin-top: 10px;
+      text-align: center; }
+    #message-columns div.publish div.messages-outer {
+      background: #003; }
+    #message-columns div.publish div.channel-header {
+      background: #04088a; }
+
+.message-header-font-tuner {
+  font-size: 13px; }
+
+.message-header-font-tuner-toggle {
+  font-size: 18px; }
+
+.message-font-tuner {
+  font-size: 10px; }
+  .message-font-tuner pre {
+    font-size: inherit !important; }
+    .message-font-tuner pre code {
+      font-size: inherit !important; }
+
+#message-columns div.channel-container:nth-of-type(1) {
+  left: 0px; }
+#message-columns div.channel-container:nth-of-type(2) {
+  left: 300px; }
+#message-columns div.channel-container:nth-of-type(3) {
+  left: 600px; }
+#message-columns div.channel-container:nth-of-type(4) {
+  left: 900px; }
+#message-columns div.channel-container:nth-of-type(5) {
+  left: 1200px; }
+#message-columns div.channel-container:nth-of-type(6) {
+  left: 1500px; }
+#message-columns div.channel-container:nth-of-type(7) {
+  left: 1800px; }
+#message-columns div.channel-container:nth-of-type(8) {
+  left: 2100px; }
+#message-columns div.channel-container:nth-of-type(9) {
+  left: 2400px; }
+#message-columns div.channel-container:nth-of-type(10) {
+  left: 2700px; }
+#message-columns div.channel-container:nth-of-type(11) {
+  left: 3000px; }
+#message-columns div.channel-container:nth-of-type(12) {
+  left: 3300px; }
+#message-columns div.channel-container:nth-of-type(13) {
+  left: 3600px; }
+#message-columns div.channel-container:nth-of-type(14) {
+  left: 3900px; }
+#message-columns div.channel-container:nth-of-type(15) {
+  left: 4200px; }
+#message-columns div.channel-container:nth-of-type(16) {
+  left: 4500px; }
+#message-columns div.channel-container:nth-of-type(17) {
+  left: 4800px; }
+#message-columns div.channel-container:nth-of-type(18) {
+  left: 5100px; }
+#message-columns div.channel-container:nth-of-type(19) {
+  left: 5400px; }
+#message-columns div.channel-container:nth-of-type(20) {
+  left: 5700px; }
+#message-columns div.channel-container:nth-of-type(21) {
+  left: 6000px; }
+
+/*# sourceMappingURL=console-columns.css.map */

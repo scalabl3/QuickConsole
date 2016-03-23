@@ -1,0 +1,18 @@
+{
+  "text": "The green monkey bought a ripe yellow banana.",
+  "meta": {
+    "auto_timestamp": 1458687921554,
+    "auto_sequence": 9,
+    "auto-geo": {
+      "latitude": 33.7818,
+      "longitude": -73.9862
+    },
+    "auto-translate": {
+        "lang": {
+            "from": "en",
+            "to": "fr,es,it"
+        },
+        "field": "text"
+    }
+  }
+}
