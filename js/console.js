@@ -64,7 +64,7 @@ function setup_console_step2() {
 
     if (qc.settings.auto_publish) {
         setTimeout(function(){
-            $("#btn-publish-auto").click();
+            do_publish_auto();
         }, 1500);
     }
 }
