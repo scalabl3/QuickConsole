@@ -53,7 +53,7 @@ button.btn-on {
   background: green !important; }
 
 button:focus {
-  border: none !important; }
+  border-color: #424242 !important; }
 
 .fa-rotate-45 {
   -ms-transform: rotate(45deg);
