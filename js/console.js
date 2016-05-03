@@ -77,7 +77,11 @@ function reset_console() {
 $(function() {
 
     changeCssClass("#wrapper-scroll", "min-width: 2000px");
-
+    
+    if (window.location.origin.indexOf("localhost") >= 0) {
+        $("#favicon").attr("href", "./images/favicon-local.png")
+    }
+    
     setup_console();
 
 

@@ -6,3 +6,5 @@
 * Blocks Mode Icon
 * Activity Log Pane
 * XHR Implementation
+
+

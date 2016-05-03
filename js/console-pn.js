@@ -16,15 +16,13 @@ function do_pn_init() {
     });
 
     qc.p.flex_history = pubnub_flex_history;
-    qc.p.subscribev2 = subscribev2;
 }
 
 function do_subscribe(history_first) {
 
     history_first = (history_first ? true : false);
 
-    qc.p.subscribev2({
-        channel: qc.settings.channels.join(','),
+    qc.p.subscribev2 = new SubscribeV2({
         subscribe_key: qc.settings.subkey,
         ssl: qc.settings.ssl,
         origin: qc.settings.origin,
@@ -60,13 +58,23 @@ function do_subscribe(history_first) {
         connect: function() {
             console.log("Connected to ", ch);
         }
-    })
+    });
+    qc.p.subscribev2.add_channel(qc.settings.channels);
+    qc.p.subscribev2.connect();
 }
 
 
 
-function do_publish() {
+function do_publish(isAuto) {
+
+    isAuto = (isAuto ? isAuto : false);
+
     var msg = JSON.parse(editor.getValue());
+
+    if (isAuto) {
+        msg.meta.auto_publish = true;
+        msg.meta.auth_publish_count = qc.auto_publish_count;
+    }
 
     _.forEach(qc.settings.publish_channels, function(channel, k) {
         qc.p.publish({
@@ -85,24 +93,35 @@ function do_publish() {
 
 function do_publish_auto() {
 
-    if (_.isNil(auto_pub)) {
+    if (_.isNil(qc.auto_pub)) {
+
+        qc.auto_publish_count = 1;
 
         do_publish();
 
-        auto_pub = setInterval(function () {
-            do_publish();
+        qc.auto_pub = setInterval(function () {
+            if (qc.auto_publish_count < 10) {
+                do_publish(true);
+                qc.auto_publish_count++;
+            }
+            else {
+                // call it again so that it clears Interval
+                do_publish_auto();
+            }
         }, qc.settings.auto_publish_interval);
 
         qc.settings.auto_publish = true;
         save_to_querystring();
 
-        console.log("auto-publish started", "[ every " + _.truncate(qc.settings.auto_publish_interval / 1000) + " seconds]");
+        console.log("auto-publish started", "[ 10 total, 1 every " + _.truncate(qc.settings.auto_publish_interval / 1000) + " seconds]");
         $("#btn-publish-auto").toggleClass("btn-default btn-success btn-on");
     }
     else {
-        clearInterval(auto_pub);
-        auto_pub = null;
+        clearInterval(qc.auto_pub);
+        qc.auto_pub = null;
         qc.settings.auto_publish = false;
+        save_to_querystring();
+
         console.log("auto-publish ended");
         $("#btn-publish-auto").toggleClass("btn-default btn-success btn-on");
     }

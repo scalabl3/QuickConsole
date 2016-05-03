@@ -15,11 +15,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/theme-twilight.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-json.js"></script>
 
-    <script src="https://cdn.pubnub.com/pubnub-3.14.4.min.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub-3.14.5.min.js"></script>
     <script src="https://cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 
     <script src="js/subv2_old.js"></script>
+    <script src="js/subv2.js"></script>
 
     <script src="js/console.js"></script>
     <script src="js/console-columns.js"></script>
@@ -29,7 +30,7 @@
     <script src="js/console-util.js"></script>
     <script src="js/geo-data.js"></script>
 
-    <link rel="icon" href="./images/favicon.png">
+    <link id="favicon" rel="icon" href="./images/favicon.png">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed|Source+Sans+Pro|Palanquin' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-uSbimwRPo7PKyTL6azsx1CcBce/X9Qg+wX1MAjNV1gAkSXYveZbZeMMyJghdsSol" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -129,6 +130,23 @@
         <div id="console-name" class="navbar-right console-name">My Console</div>
     </div>
 </nav>
+
+<div id="modal-edit-channel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit-channel-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title">Edit Channel Subscription</h6>
+            </div>
+            <div class="modal-body">
+                <input id="txt-edit-channel" class="form-control" type="text" placeholder="channel(s)" data-channel="" data-index="" /><br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-error" data-dismiss="modal">Cancel</button>
+                <button id="btn-edit-channel" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="modal-add-channel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-channel-modal">
     <div class="modal-dialog" role="document">

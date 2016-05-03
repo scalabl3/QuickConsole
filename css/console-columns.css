@@ -57,15 +57,22 @@ div.editor {
       padding-left: 8px;
       color: #eee;
       border-right: 1px solid #919191; }
-      #message-columns div.channel-container div.channel-header .toggler {
+      #message-columns div.channel-container div.channel-header .toggler, #message-columns div.channel-container div.channel-header i.fa {
         position: absolute;
         right: 5px;
         top: 4px;
-        color: #c0c0c0; }
-      #message-columns div.channel-container div.channel-header .on {
+        color: #c0c0c0;
+        opacity: 0.8; }
+      #message-columns div.channel-container div.channel-header .on, #message-columns div.channel-container div.channel-header i.fa {
+        color: #c0c0c0;
+        font-size: 13px;
+        top: 6px;
+        opacity: 0.8;
+        cursor: pointer; }
+      #message-columns div.channel-container div.channel-header i.fa:hover {
         color: #eee;
-        font-size: 16px;
-        top: 5px; }
+        opacity: 1;
+        cursor: pointer; }
     #message-columns div.channel-container div.messages-outer {
       position: absolute;
       top: 26px;
@@ -122,7 +129,7 @@ div.editor {
       background: #04088a; }
 
 .message-header-font-tuner {
-  font-size: 13px; }
+  font-size: 12px; }
 
 .message-header-font-tuner-toggle {
   font-size: 18px; }

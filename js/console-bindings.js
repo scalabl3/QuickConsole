@@ -37,6 +37,99 @@ function enableTogglers() {
     });
 }
 
+function bind_column_buttons() {
+    console.log("cols", qc.settings.channels.length);
+
+    $("i.ch-btn").each(function(i){
+
+        $(this).off("click").click(function() {
+            var b = $(this);
+            var o = b.attr("data-op");
+            var i = parseInt(b.attr("data-index"));
+            var c = b.attr("data-channel");
+
+            switch (o) {
+                case "edit": console.log(i,o,c);
+                    $("#txt-edit-channel").attr("data-channel", c).attr("data-index", i).attr("value", c);
+                    $("#modal-edit-channel").modal("show");
+                    break;
+                case "left":
+                    if (i > 0) {
+
+                        console.log(i,o,c);
+
+                        var x = $("div.channel-container[data-index=" + (i - 1) + "]");
+                        var y = $("div.channel-container[data-index=" + i + "]");
+
+                        console.log(x, x.attr("data-index"), x.attr("data-channel"));
+                        console.log(y, y.attr("data-index"), y.attr("data-channel"));
+
+                        x.detach();
+                        y.after(x);
+
+                        // TODO: Reorder Subscribe List & Save
+
+
+                        // Change Data Index
+                        x.attr("data-index", i);
+
+                        x.find(".ch-col").each(function(){
+                            $(this).attr("data-index", i);
+                        });
+
+                        y.attr("data-index", i - 1);
+
+                        y.find(".ch-col").each(function(){
+                            $(this).attr("data-index", i - 1);
+                        });
+
+
+                        bind_column_buttons();
+
+                    }
+                    break;
+                case "right":
+                    if (i < (qc.settings.channels.length - 1)) {
+
+                        console.log(i,o,c);
+
+                        // Grab Divs
+                        var x = $("div.channel-container[data-index=" + i + "]");
+                        var y = $("div.channel-container[data-index=" + (i + 1) + "]");
+
+                        console.log(x, x.attr("data-index"), x.attr("data-channel"));
+                        console.log(y, y.attr("data-index"), y.attr("data-channel"));
+
+                        x.detach();
+                        y.after(x);
+
+                        // TODO: Reorder Subscribe List & Save
+
+
+                        // Change Data Index
+                        x.attr("data-index", i + 1);
+
+                        x.find(".ch-col").each(function(){
+                            $(this).attr("data-index", i + 1);
+                        });
+
+                        y.attr("data-index", i);
+
+                        y.find(".ch-col").each(function(){
+                            $(this).attr("data-index", i);
+                        });
+
+                        bind_column_buttons();
+
+                    }
+                    break;
+                case "remove": console.log(i,o,c);
+                    break;
+            }
+        });
+    });
+}
+
 function bind_events() {
 
     $("input[name='rad-pn-origin']").each(function(i){
@@ -76,20 +169,23 @@ function bind_events() {
 
     $("#txt-subchannels").change(function () {
         qc.settings.channels = convert_comma_separate_to_array($(this).val());
+        $("#txt-subchannels").val(qc.settings.channels.join(', '));
         save_to_querystring();
         reset_console();
     });
 
     $("#txt-pubchannels").change(function () {
-        $("#txt-pubchannels2").val($("#txt-pubchannels").val());
         qc.settings.publish_channels = convert_comma_separate_to_array($(this).val());
+        $("#txt-pubchannels").val(qc.settings.publish_channels.join(', '));
+        $("#txt-pubchannels2").val(qc.settings.publish_channels.join(', '));
         save_to_querystring();
         reset_console();
     });
 
     $("#txt-pubchannels2").change(function () {
-        $("#txt-pubchannels").val($("#txt-pubchannels2").val());
         qc.settings.publish_channels = convert_comma_separate_to_array($(this).val());
+        $("#txt-pubchannels").val(qc.settings.publish_channels.join(', '));
+        $("#txt-pubchannels2").val(qc.settings.publish_channels.join(', '));
         save_to_querystring();
         reset_console();
     });
@@ -108,10 +204,44 @@ function bind_events() {
 
     $("#btn-add-channel").click(function() {
         $("#modal-add-channel").modal('hide');
+        // TODO: Add Channel Subscription
     });
 
     $("#txt-add-channel").onEnter(function() {
         $("#modal-add-channel").modal('hide');
+        // TODO: Add Channel Subscription
+    });
+
+    $("#btn-edit-channel").click(function() {
+        $("#modal-edit-channel").modal('hide');
+        var oc = $("#txt-edit-channel").attr("data-channel");
+        var nc = $("#txt-edit-channel").val();
+        var i = parseInt($("#txt-edit-channel").attr("data-index"));
+
+        console.log(oc, nc, i);
+
+        if (!_.isEqual(oc, nc)) {
+            qc.settings.channels[i] = nc;
+
+            // Change data attributes
+            $("div.channel-container[data-index='" + i + "'] .ch-col").each(function(){
+                $(this).attr("data-channel", nc);
+            });
+
+            // Change column title
+            $("div.channel-container[data-index='" + i + "']").find("div.channel-name").text(nc);
+
+            // Change Saved Channel List
+            $("#txt-subchannels").val(qc.settings.channels.join(', '));
+
+            // Change Subscription
+            qc.p.subscribev2.remove_channel(oc);
+            qc.p.subscribev2.add_channel(nc);
+        }
+    });
+
+    $("#txt-edit-channel").onEnter(function() {
+        $("#modal-edit-channel").modal('hide');
     });
     
 }

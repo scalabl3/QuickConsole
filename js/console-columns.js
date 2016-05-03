@@ -84,14 +84,18 @@ function setup_subscribe_columns() {
         }
         else {
             var html = '' +
-                '<div class="channel-container dtcell" data-channel="' + channel + '">' +
+                '<div class="channel-container dtcell ch-col" data-channel="' + channel + '" data-index="' + k + '">' +
                 '<div class="channel-header message-header-font-tuner">' +
-                channel +
+                '<div class="channel-name">' + channel + '</div>' +
                 '<div class="pull-right message-header-font-tuner-toggle">' +
-                '<i class="fa fa-circle-o-notch fa-spin on toggler"></i>' +
+                '<i class="fa fa-edit ch-col ch-btn ch-edit" style="margin-right: 68px" data-op="edit" data-channel="' + channel + '" data-index="' + k + '"></i>' +
+                '<i class="fa fa-arrow-circle-left ch-col ch-btn ch-move-left" style="margin-right: 47px" data-op="left" data-channel="' + channel + '" data-index="' + k + '"></i>' +
+                '<i class="fa fa-arrow-circle-right ch-col ch-btn ch-move-right" style="margin-right: 26px" data-op="right" data-channel="' + channel + '" data-index="' + k + '"></i>' +
+                '<i class="fa fa-trash ch-col ch-btn ch-remove" style="margin-right: 5px" data-op="remove" data-channel="' + channel + '" data-index="' + k + '"></i>' +
+                //'<i class="fa fa-circle-o-notch fa-spin on toggler"></i>' +
                 '</div>' +
                 '</div>' +
-                '<div class="messages-outer"><div class="messages"></div></div>' +
+                '<div class="messages-outer ch-col" data-index="' + k + '"><div class="messages ch-col" data-index="' + k + '"></div></div>' +
                 '</div>';
 
             $("#message-columns").append(html);
@@ -119,6 +123,8 @@ function setup_subscribe_columns() {
             suppressScrollX: true
         });
     });
+
+    bind_column_buttons();
 }
 
 function sort_subscribe_columns() {

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.3.0/bignumber.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/js/perfect-scrollbar.jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/js/jquery.tooltipster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/theme-twilight.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-json.js"></script>
+
+    <script src="https://cdn.pubnub.com/pubnub-3.14.5.min.js"></script>
+    <script src="https://cdn.rawgit.com/scalabl3/pubnub-flex-history/v1.05/pubnub-flex-history.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+    <script src="js/subv2.js"></script>
+
+
+    <link id="favicon" rel="icon" href="./images/favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed|Source+Sans+Pro|Palanquin' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-uSbimwRPo7PKyTL6azsx1CcBce/X9Qg+wX1MAjNV1gAkSXYveZbZeMMyJghdsSol" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/darkula.min.css"rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.10/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/css/tooltipster.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css" rel="stylesheet">
+
+    <link href="css/editor-dark.css" rel="stylesheet" >
+    <link href="css/console.css" rel="stylesheet" >
+    <link href="css/console-modals.css" rel="stylesheet" >
+    <link href="css/console-columns.css" rel="stylesheet" >
+
+    <script>
+        var s,p;
+        var pub = "pub-c-4bf51630-947c-48c5-887b-d8c4f285dd52";
+        var sub = "sub-c-561467ac-e163-11e5-80de-0619f8945a4f";
+        var ori = "blocks.pubnub.com";
+        var uuid = "quick-console-" + (1000000 + Math.floor(Math.random() * 1000000));
+        var ch = "a10";
+
+        // PAM Enabled
+        var test_pam = false;
+        if (test_pam) {
+            pub = "pub-c-398765d9-55c9-4000-af11-460a08fa92da";
+            sub = "sub-c-e8fffaf2-0717-11e6-bb6c-02ee2ddab7fe";
+            ori = "pubsub.pubnub.com";
+        }
+
+
+        $(function() {
+
+            p = PUBNUB.init({
+                origin: ori,
+                publish_key: pub,
+                subscribe_key: sub,
+                uuid: uuid,
+                ssl: true
+            });
+
+            s = new SubscribeV2({
+                publish_key: pub,
+                subscribe_key: sub,
+                origin: ori,
+                uuid: uuid,
+                tls: true,
+                debug: 7,
+                error: function(e) {
+
+                },
+                connect: function(c) {
+                    publish_messages();
+                }
+            });
+
+            s.add_channel(ch);
+            s.connect();
+            s.add_channel("a11, a12,a13");
+            s.connect();
+            s.add_channel("a12");
+
+            s.remove_channel("c1,a12,a11,a13");
+
+            function publish_messages() {
+                setTimeout(function(){
+                    p.publish({
+                        message: {
+                            timestamp: Date.now().toString()
+                        },
+                        channel: ch
+                    });
+                    s.remove_channel("c1");
+                }, 2000);
+
+                setTimeout(function(){
+                    p.publish({
+                        message: {
+                            timestamp: Date.now().toString()
+                        },
+                        channel: ch
+                    });
+                }, 4000);
+            }
+
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
