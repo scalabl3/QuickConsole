@@ -66,7 +66,8 @@ function SubscribeV2(args) {
 
     function check_internet(callback) {
         var x = new XMLHttpRequest();
-        var url = "http://pubsub.pubnub.com/time/0?uuid=" + params.state.uuid;
+        var url = (params.state.tls ? "https://" : "http://");
+            url += "//pubsub.pubnub.com/time/0?uuid=" + params.state.uuid;
 
         x.addEventListener("load", function(){
             console.info("Check Internet: LOAD");
