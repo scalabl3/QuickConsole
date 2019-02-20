@@ -6,7 +6,8 @@ function do_pn_init() {
         origin: qc.settings.origin,
         publish_key: qc.settings.pubkey,
         subscribe_key: qc.settings.subkey,
-        uuid: qc.settings.uuid
+        uuid: qc.settings.uuid,
+        authkey: qc.settings.auth
     });
 
     qc.p2 = PUBNUB.init({
@@ -26,6 +27,7 @@ function do_subscribe(history_first) {
         subscribe_key: qc.settings.subkey,
         ssl: qc.settings.ssl,
         origin: qc.settings.origin,
+        authkey: qc.settings.auth,
         message: function(msg) {
             //console.log("msg:",msg.meta.channel,msg);
             var content = "";
