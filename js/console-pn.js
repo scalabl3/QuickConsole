@@ -8,7 +8,7 @@ function do_pn_init() {
         subscribe_key: qc.settings.subkey,
         uuid: qc.settings.uuid,
         ssl: true,
-        authkey: qc.settings.auth
+        auth_key: qc.settings.auth
     });
 
     qc.p2 = PUBNUB.init({
@@ -16,7 +16,7 @@ function do_pn_init() {
         subscribe_key: qc.settings.subkey,
         uuid: qc.settings.uuid,
         ssl: true,
-        authkey: qc.settings.auth
+        auth_key: qc.settings.auth
     });
 
     qc.p.flex_history = pubnub_flex_history;
