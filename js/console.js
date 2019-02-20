@@ -33,7 +33,7 @@ function init_qc() {
             channels: ["ch1"],
             publish_channels: ["ch1"],
             auth: "",
-            ssl: false,
+            ssl: true,
             uuid: "quick-console-" + (1000000 + Math.floor(Math.random() * 1000000)),
             auto_publish: false,
             auto_publish_interval: 5000
