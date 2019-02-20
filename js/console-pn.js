@@ -7,13 +7,16 @@ function do_pn_init() {
         publish_key: qc.settings.pubkey,
         subscribe_key: qc.settings.subkey,
         uuid: qc.settings.uuid,
+        ssl: true,
         authkey: qc.settings.auth
     });
 
     qc.p2 = PUBNUB.init({
         publish_key: qc.settings.pubkey,
         subscribe_key: qc.settings.subkey,
-        uuid: qc.settings.uuid
+        uuid: qc.settings.uuid,
+        ssl: true,
+        authkey: qc.settings.auth
     });
 
     qc.p.flex_history = pubnub_flex_history;

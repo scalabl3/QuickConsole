@@ -53,10 +53,12 @@ function setup_console(is_reset) {
 
     if (load_from_querystring()){           // console-url.js
 
-        console.log(qc.settings.ssl);
+
+        // Quick Forcing of TLS/SSL Setting
         qc.settings.ssl = true;
         save_to_querystring();
-        console.log(qc.settings.ssl);
+
+
         setup_console_step2();
     }
 }
