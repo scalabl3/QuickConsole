@@ -23,10 +23,6 @@ function do_subscribe(history_first) {
 
     history_first = (history_first ? true : false);
 
-
-    qc.settings.tls = true;
-    save_to_querystring();
-    
     qc.p.subscribev2 = new SubscribeV2({
         subscribe_key: qc.settings.subkey,
         ssl: qc.settings.ssl,
