@@ -174,6 +174,13 @@ function bind_events() {
         reset_console();
     });
 
+    $("#txt-authkey").change(function () {
+        qc.settings.auth = $(this).val();
+        $("#txt-authkey").val(qc.settings.auth);
+        save_to_querystring();
+        reset_console();
+    });
+
     $("#txt-pubchannels").change(function () {
         qc.settings.publish_channels = convert_comma_separate_to_array($(this).val());
         $("#txt-pubchannels").val(qc.settings.publish_channels.join(', '));
