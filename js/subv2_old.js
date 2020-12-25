@@ -19,7 +19,7 @@ var subscribev2 = function(args) {
         },
         options: {
             ssl: false,
-            origin: "pubsub.pubnub.com",
+            origin: "ps.pndsn.com",
             auth: "",
             use_v2: true,
             v1_path: "/subscribe/",
@@ -80,7 +80,6 @@ var subscribev2 = function(args) {
     function expand_message(m) {
 
         var key_map = {
-            o: 'origination_timetoken',
             a: 'shard',
             b: 'subscription_match',
             c: 'channel',
@@ -92,7 +91,6 @@ var subscribev2 = function(args) {
             s: 'sequence_number',
             o: 'origination_timetoken',
             p: 'publish_timetoken',
-            r: 'replication_map',
             u: 'user_metadata',
             t: 'timetoken',
             r: 'region_code',
@@ -144,9 +142,7 @@ var subscribev2 = function(args) {
             }
         };
 
-        var m2 = swap(m1);
-
-        return m2;
+        return swap(m1);
     }
 
 
@@ -158,7 +154,7 @@ var subscribev2 = function(args) {
 
         subscribe_options.timetoken = (_.has(subscribe_options, "timetoken") ? subscribe_options.timetoken : 0);
 
-        var url = make_url(subscribe_options.subscribe_key, subscribe_options.channel, subscribe_options.timetoken, (_.has(subscribe_options, "ssl") ? subscribe_options.ssl : false), (_.has(subscribe_options, "origin") ? subscribe_options.origin : "pubsub.pubnub.com"));
+        var url = make_url(subscribe_options.subscribe_key, subscribe_options.channel, subscribe_options.timetoken, (_.has(subscribe_options, "ssl") ? subscribe_options.ssl : false), (_.has(subscribe_options, "origin") ? subscribe_options.origin : "ps.pndsn.com"));
 
         var r = new XMLHttpRequest();
         r.responseType = "json";

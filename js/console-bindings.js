@@ -16,7 +16,7 @@ function populate_fields(){
     $("#txt-authkey").val(qc.settings.auth);
     $("#txt-uuid").val(qc.settings.uuid);
 
-    if (qc.settings.origin === "pubsub.pubnub.com") {
+    if (qc.settings.origin === "ps.pndsn.com") {
         $("#rad-pn-origin-1").prop("checked", true);
         $("#rad-pn-origin-2").prop("checked", false);
         $("#console-brand").attr("src","images/pubnub-icon-600x600.png");
@@ -136,7 +136,7 @@ function bind_events() {
        $(this).change(function(){
            qc.settings.origin = $("input[name='rad-pn-origin']:checked").val();
            $('#txt-pn-origin').val(qc.settings.origin);
-           if (qc.settings.origin === "pubsub.pubnub.com") {
+           if (qc.settings.origin === "ps.pndsn.com") {
                $("#console-brand").attr("src","images/pubnub-icon-600x600.png");
            }
            else {

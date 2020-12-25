@@ -27,7 +27,7 @@ function init_qc() {
             qc_cipher: "encryptme",
             message_font_size: 10,
             message_column_size: 300,
-            origin: "pubsub.pubnub.com",
+            origin: "ps.pndsn.com",
             pubkey: "demo",
             subkey: "demo",
             channels: ["ch1"],

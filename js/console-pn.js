@@ -22,6 +22,8 @@ function do_pn_init() {
     qc.p.flex_history = pubnub_flex_history;
 }
 
+console.log('hi');
+
 function do_subscribe(history_first) {
 
     history_first = (history_first ? true : false);
@@ -32,13 +34,14 @@ function do_subscribe(history_first) {
         origin: qc.settings.origin,
         authkey: qc.settings.auth,
         message: function(msg) {
-            //console.log("msg:",msg.meta.channel,msg);
+            console.log("\n\n\n\n");
+            console.log("msg:",msg.meta.channel, msg.meta.subscription_match, msg);
             var content = "";
             var id = 1000000 + Math.floor(Math.random()*1000000);
 
             content += '<div class="message-content " data-id="' + id + '" style="">';
             content += '<div class="message-header">';
-            content += '<div class="published">p: ' + msg.meta.published.timetoken + '</div>';
+            content += '<div class="published">p: ' + msg.meta.published.timetoken + ' [' + msg.meta.channel + ']</div>';
             content += '</div>';
             content += '<div class="message-body message-font-tuner">';
             content += '<pre><code class="unformatted json">' + JSON.stringify(msg.data, null, '   ') + '</code></pre>';
@@ -48,8 +51,8 @@ function do_subscribe(history_first) {
             content += '</div>';
             content += '</div>';
 
-            var e1 = $("div.channel-container[data-channel='" + msg.meta.channel + "'] div.messages");
-            var e2 = $("div.channel-container[data-channel='" + msg.meta.channel + "'] div.messages-outer");
+            var e1 = $("div.channel-container[data-channel='" + msg.meta.subscription_match + "'] div.messages");
+            var e2 = $("div.channel-container[data-channel='" + msg.meta.subscription_match + "'] div.messages-outer");
 
             e1.append(content);
             highlight_all();

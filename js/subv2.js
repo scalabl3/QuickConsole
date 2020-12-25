@@ -38,7 +38,7 @@ function SubscribeV2(args) {
             timetoken: 0,
             subkey: null,
             tls: false,
-            origin: "pubsub.pubnub.com",
+            origin: "ps.pndsn.com",
             uuid: null,
             presence_state: null,
             useauthkey: false,
@@ -67,7 +67,7 @@ function SubscribeV2(args) {
     function check_internet(callback) {
         var x = new XMLHttpRequest();
         var url = (params.state.tls ? "https://" : "http://");
-            url += "//pubsub.pubnub.com/time/0?uuid=" + params.state.uuid;
+            url += "//ps.pndsn.com/time/0?uuid=" + params.state.uuid;
 
         x.addEventListener("load", function(){
             console.info("Check Internet: LOAD");
@@ -272,7 +272,6 @@ function SubscribeV2(args) {
     function expand_message(m) {
 
         var key_map = {
-            o: 'origination_timetoken',
             a: 'shard',
             b: 'subscription_match',
             c: 'channel',
@@ -284,7 +283,6 @@ function SubscribeV2(args) {
             s: 'sequence_number',
             o: 'origination_timetoken',
             p: 'publish_timetoken',
-            r: 'replication_map',
             u: 'user_metadata',
             t: 'timetoken',
             r: 'region_code',
@@ -321,6 +319,7 @@ function SubscribeV2(args) {
         var m1 = {
             data: m.d,
             meta: {
+                b: m.b,
                 c: m.c,
                 published: m.p,
                 publisher: {
@@ -338,6 +337,7 @@ function SubscribeV2(args) {
 
         var m2 = swap(m1);
 
+        console.log(m2);
         return m2;
     }
 
